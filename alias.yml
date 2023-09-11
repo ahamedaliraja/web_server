@@ -1,0 +1,9 @@
+---
+- name: Install httpd alias
+  hosts: all
+  tasks:
+  - name: Generate a basic homepage from jinja2 template
+    copy:
+      src: alias.conf
+      dest: /var/www/html/index.html
+
