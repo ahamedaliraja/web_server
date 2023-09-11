@@ -1,9 +1,15 @@
 ---
 - name: Install httpd alias
-  hosts: all
+  hosts: prod
   tasks:
   - name: Generate a basic homepage from jinja2 template
-    copy:
+    ansible.builtin.copy:
       src: alias.conf
       dest: /var/www/html/index.html
-
+    notify: restart
+  handlers:
+    - name: restart
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
+        enabled: yes
